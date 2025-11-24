@@ -1,0 +1,325 @@
+﻿#pragma warning disable
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace FileIOAndLINQ.PresentationLayer
+{
+    partial class FrmVerseList
+    {
+        private IContainer components = null;
+
+        // === Top menu ===
+        private MenuStrip mnsFileActions;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem tsmSave;
+        private ToolStripMenuItem tsmLoad;
+        private ToolStripMenuItem tsmExit;
+
+        // === Groups ===
+        private GroupBox grpAddVerse;
+        private GroupBox grpFilterAndSort;
+
+        // === Add Verse controls ===
+        private Label lblBook;
+        private ComboBox cmbVerseBook;
+        private Label lblBookError;
+
+        private Label lblChapter;
+        private TextBox txtVerseChapter;
+        private Label lblChapterError;
+
+        private Label lblVerse;
+        private TextBox txtVerseVerse;
+        private Label lblVerseError;
+
+        private Label lblText;
+        private TextBox txtVerseText;
+        private Label lblTextError;
+
+        private Label lblMeaning;
+        private TextBox txtVerseMeaning;
+        private Label lblMeaningError;
+
+        private Label lblImportance;
+        private NumericUpDown nudVerseImportance;
+        private Label lblImportanceError;
+
+        private Button btnAddVerse;
+
+        // === Filter/Sort controls ===
+        private RadioButton rdoShowAll;
+        private RadioButton rdoShowLeastValuable;
+        private RadioButton rdoShowMostValuable;
+        private TrackBar trbNumberToShow;
+
+        // === Grid ===
+        private DataGridView dgvVerseDisplay;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+                components.Dispose();
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            this.components = new Container();
+
+            // Form
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.ClientSize = new Size(1000, 650);
+            this.Text = "Verse List";
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            // ===== MenuStrip =====
+            this.mnsFileActions = new MenuStrip();
+            this.mnsFileActions.Name = "mnsFileActions";
+            this.mnsFileActions.Dock = DockStyle.Top;
+
+            this.fileToolStripMenuItem = new ToolStripMenuItem();
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Text = "File";
+
+            this.tsmSave = new ToolStripMenuItem();
+            this.tsmSave.Name = "tsmSave";
+            this.tsmSave.Text = "Save";
+
+            this.tsmLoad = new ToolStripMenuItem();
+            this.tsmLoad.Name = "tsmLoad";
+            this.tsmLoad.Text = "Load";
+
+            this.tsmExit = new ToolStripMenuItem();
+            this.tsmExit.Name = "tsmExit";
+            this.tsmExit.Text = "Exit";
+
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
+                this.tsmSave, this.tsmLoad, this.tsmExit
+            });
+
+            this.mnsFileActions.Items.AddRange(new ToolStripItem[] {
+                this.fileToolStripMenuItem
+            });
+
+            this.MainMenuStrip = this.mnsFileActions;
+            this.Controls.Add(this.mnsFileActions);
+
+            // ===== Group: Add A Bible Verse =====
+            this.grpAddVerse = new GroupBox();
+            this.grpAddVerse.Name = "grpAddVerse";
+            this.grpAddVerse.Text = "Add A Bible Verse";
+            this.grpAddVerse.Location = new Point(12, 36);
+            this.grpAddVerse.Size = new Size(600, 320);
+
+            // Book
+            this.lblBook = new Label();
+            this.lblBook.Name = "lblBook";
+            this.lblBook.Text = "Book:";
+            this.lblBook.AutoSize = true;
+            this.lblBook.Location = new Point(20, 30);
+
+            this.cmbVerseBook = new ComboBox();
+            this.cmbVerseBook.Name = "cmbVerseBook";
+            this.cmbVerseBook.Location = new Point(120, 26);
+            this.cmbVerseBook.Size = new Size(200, 28);
+            this.cmbVerseBook.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            this.lblBookError = new Label();
+            this.lblBookError.Name = "lblBookError";
+            this.lblBookError.Text = "Select a book";
+            this.lblBookError.ForeColor = Color.Red;
+            this.lblBookError.Visible = false;
+            this.lblBookError.AutoSize = true;
+            this.lblBookError.Location = new Point(330, 30);
+
+            // Chapter
+            this.lblChapter = new Label();
+            this.lblChapter.Name = "lblChapter";
+            this.lblChapter.Text = "Chapter:";
+            this.lblChapter.AutoSize = true;
+            this.lblChapter.Location = new Point(20, 65);
+
+            this.txtVerseChapter = new TextBox();
+            this.txtVerseChapter.Name = "txtVerseChapter";
+            this.txtVerseChapter.Location = new Point(120, 61);
+            this.txtVerseChapter.Size = new Size(100, 27);
+
+            this.lblChapterError = new Label();
+            this.lblChapterError.Name = "lblChapterError";
+            this.lblChapterError.Text = "Must be a number";
+            this.lblChapterError.ForeColor = Color.Red;
+            this.lblChapterError.Visible = false;
+            this.lblChapterError.AutoSize = true;
+            this.lblChapterError.Location = new Point(230, 65);
+
+            // Verse
+            this.lblVerse = new Label();
+            this.lblVerse.Name = "lblVerse";
+            this.lblVerse.Text = "Verse:";
+            this.lblVerse.AutoSize = true;
+            this.lblVerse.Location = new Point(20, 100);
+
+            this.txtVerseVerse = new TextBox();
+            this.txtVerseVerse.Name = "txtVerseVerse";
+            this.txtVerseVerse.Location = new Point(120, 96);
+            this.txtVerseVerse.Size = new Size(100, 27);
+
+            this.lblVerseError = new Label();
+            this.lblVerseError.Name = "lblVerseError";
+            this.lblVerseError.Text = "Invalid format";
+            this.lblVerseError.ForeColor = Color.Red;
+            this.lblVerseError.Visible = false;
+            this.lblVerseError.AutoSize = true;
+            this.lblVerseError.Location = new Point(230, 100);
+
+            // Text
+            this.lblText = new Label();
+            this.lblText.Name = "lblText";
+            this.lblText.Text = "Text:";
+            this.lblText.AutoSize = true;
+            this.lblText.Location = new Point(20, 135);
+
+            this.txtVerseText = new TextBox();
+            this.txtVerseText.Name = "txtVerseText";
+            this.txtVerseText.Location = new Point(120, 131);
+            this.txtVerseText.Size = new Size(300, 60);
+            this.txtVerseText.Multiline = true;
+
+            this.lblTextError = new Label();
+            this.lblTextError.Name = "lblTextError";
+            this.lblTextError.Text = "Cannot be blank";
+            this.lblTextError.ForeColor = Color.Red;
+            this.lblTextError.Visible = false;
+            this.lblTextError.AutoSize = true;
+            this.lblTextError.Location = new Point(430, 135);
+
+            // Meaning
+            this.lblMeaning = new Label();
+            this.lblMeaning.Name = "lblMeaning";
+            this.lblMeaning.Text = "Meaning:";
+            this.lblMeaning.AutoSize = true;
+            this.lblMeaning.Location = new Point(20, 205);
+
+            this.txtVerseMeaning = new TextBox();
+            this.txtVerseMeaning.Name = "txtVerseMeaning";
+            this.txtVerseMeaning.Location = new Point(120, 201);
+            this.txtVerseMeaning.Size = new Size(300, 60);
+            this.txtVerseMeaning.Multiline = true;
+
+            this.lblMeaningError = new Label();
+            this.lblMeaningError.Name = "lblMeaningError";
+            this.lblMeaningError.Text = "Cannot be blank";
+            this.lblMeaningError.ForeColor = Color.Red;
+            this.lblMeaningError.Visible = false;
+            this.lblMeaningError.AutoSize = true;
+            this.lblMeaningError.Location = new Point(430, 205);
+
+            // Importance
+            this.lblImportance = new Label();
+            this.lblImportance.Name = "lblImportance";
+            this.lblImportance.Text = "Importance:";
+            this.lblImportance.AutoSize = true;
+            this.lblImportance.Location = new Point(20, 275);
+
+            this.nudVerseImportance = new NumericUpDown();
+            this.nudVerseImportance.Name = "nudVerseImportance";
+            this.nudVerseImportance.Minimum = 1;
+            this.nudVerseImportance.Maximum = 10;
+            this.nudVerseImportance.Value = 1;
+            this.nudVerseImportance.Location = new Point(120, 271);
+            this.nudVerseImportance.Size = new Size(100, 27);
+
+            this.lblImportanceError = new Label();
+            this.lblImportanceError.Name = "lblImportanceError";
+            this.lblImportanceError.Text = "1-10 only";
+            this.lblImportanceError.ForeColor = Color.Red;
+            this.lblImportanceError.Visible = false;
+            this.lblImportanceError.AutoSize = true;
+            this.lblImportanceError.Location = new Point(230, 275);
+
+            // Add button
+            this.btnAddVerse = new Button();
+            this.btnAddVerse.Name = "btnAddVerse";
+            this.btnAddVerse.Text = "Add Verse";
+            this.btnAddVerse.Location = new Point(450, 265);
+            this.btnAddVerse.Size = new Size(120, 32);
+
+            // Add controls to grpAddVerse
+            this.grpAddVerse.Controls.Add(this.lblBook);
+            this.grpAddVerse.Controls.Add(this.cmbVerseBook);
+            this.grpAddVerse.Controls.Add(this.lblBookError);
+            this.grpAddVerse.Controls.Add(this.lblChapter);
+            this.grpAddVerse.Controls.Add(this.txtVerseChapter);
+            this.grpAddVerse.Controls.Add(this.lblChapterError);
+            this.grpAddVerse.Controls.Add(this.lblVerse);
+            this.grpAddVerse.Controls.Add(this.txtVerseVerse);
+            this.grpAddVerse.Controls.Add(this.lblVerseError);
+            this.grpAddVerse.Controls.Add(this.lblText);
+            this.grpAddVerse.Controls.Add(this.txtVerseText);
+            this.grpAddVerse.Controls.Add(this.lblTextError);
+            this.grpAddVerse.Controls.Add(this.lblMeaning);
+            this.grpAddVerse.Controls.Add(this.txtVerseMeaning);
+            this.grpAddVerse.Controls.Add(this.lblMeaningError);
+            this.grpAddVerse.Controls.Add(this.lblImportance);
+            this.grpAddVerse.Controls.Add(this.nudVerseImportance);
+            this.grpAddVerse.Controls.Add(this.lblImportanceError);
+            this.grpAddVerse.Controls.Add(this.btnAddVerse);
+            this.Controls.Add(this.grpAddVerse);
+
+            // ===== Group: Filter And Sort =====
+            this.grpFilterAndSort = new GroupBox();
+            this.grpFilterAndSort.Name = "grpFilterAndSort";
+            this.grpFilterAndSort.Text = "Filter And Sort";
+            this.grpFilterAndSort.Location = new Point(620, 36);
+            this.grpFilterAndSort.Size = new Size(360, 320);
+
+            this.rdoShowAll = new RadioButton();
+            this.rdoShowAll.Name = "rdoShowAll";
+            this.rdoShowAll.Text = "Show All";
+            this.rdoShowAll.Checked = true;
+            this.rdoShowAll.AutoSize = true;
+            this.rdoShowAll.Location = new Point(20, 30);
+
+            this.rdoShowLeastValuable = new RadioButton();
+            this.rdoShowLeastValuable.Name = "rdoShowLeastValuable";
+            this.rdoShowLeastValuable.Text = "Show Least Important";
+            this.rdoShowLeastValuable.AutoSize = true;
+            this.rdoShowLeastValuable.Location = new Point(20, 60);
+
+            this.rdoShowMostValuable = new RadioButton();
+            this.rdoShowMostValuable.Name = "rdoShowMostValuable";
+            this.rdoShowMostValuable.Text = "Show Most Important";
+            this.rdoShowMostValuable.AutoSize = true;
+            this.rdoShowMostValuable.Location = new Point(20, 90);
+
+            this.trbNumberToShow = new TrackBar();
+            this.trbNumberToShow.Name = "trbNumberToShow";
+            this.trbNumberToShow.Minimum = 1;
+            this.trbNumberToShow.Value = 1;
+            this.trbNumberToShow.Location = new Point(20, 130);
+            this.trbNumberToShow.Size = new Size(300, 45);
+
+            this.grpFilterAndSort.Controls.Add(this.rdoShowAll);
+            this.grpFilterAndSort.Controls.Add(this.rdoShowLeastValuable);
+            this.grpFilterAndSort.Controls.Add(this.rdoShowMostValuable);
+            this.grpFilterAndSort.Controls.Add(this.trbNumberToShow);
+            this.Controls.Add(this.grpFilterAndSort);
+
+            // ===== DataGridView =====
+            this.dgvVerseDisplay = new DataGridView();
+            this.dgvVerseDisplay.Name = "dgvVerseDisplay";
+            this.dgvVerseDisplay.Location = new Point(12, 370);
+            this.dgvVerseDisplay.Size = new Size(968, 260);
+            this.dgvVerseDisplay.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.dgvVerseDisplay.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVerseDisplay.AllowUserToAddRows = false;
+            this.dgvVerseDisplay.AllowUserToDeleteRows = false;
+            this.dgvVerseDisplay.ReadOnly = true;
+            this.Controls.Add(this.dgvVerseDisplay);
+
+            this.PerformLayout();
+        }
+    }
+}

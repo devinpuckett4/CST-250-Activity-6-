@@ -1,0 +1,26 @@
+
+
+namespace FileIOAndLINQ.Models
+{
+    public class VerseRequestModel
+    {
+        public string Book { get; set; }
+        public int Chapter { get; set; }
+        public string Verse { get; set; }
+        public string Text { get; set; }
+        public string Meaning { get; set; }
+        public int Importance { get; set; }
+
+        public VerseRequestModel() { }
+
+        public VerseRequestModel(string book, int chapter, string verse, string text, string meaning, int importance)
+        {
+            Book = book;
+            Chapter = chapter;
+            Verse = verse;
+            Text = text;
+            Meaning = meaning;
+            Importance = importance;
+        }
+    }
+}

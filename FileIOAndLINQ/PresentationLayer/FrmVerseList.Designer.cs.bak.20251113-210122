@@ -1,0 +1,67 @@
+namespace FileIOAndLINQ.PresentationLayer
+{
+    partial class FrmVerseList
+    {
+        private System.ComponentModel.IContainer components = null;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1200, 700);
+            this.Text = "Bible Verses";
+            // TODO: Use the Visual Studio Designer to add and position all controls as per the guide's figures.
+            // Control names must match exactly: mnsFileActions, tsmFile, tsmSave, tsmLoad, tsmExit, grpAddVerse, lblBook, cmbVerseBook, lblBookError, lblChapter, txtVerseChapter, lblChapterError, lblVerse, txtVerseVerse, lblVerseError, lblText, txtVerseText, lblTextError, lblMeaning, txtVerseMeaning, lblMeaningError, lblImportance, nudVerseImportance, lblImportanceError, btnAddVerse, grpFilterAndSort, rdoShowAll, rdoShowLeastValuable, rdoShowMostValuable, trbNumberToShow, dgvVerseDisplay
+            // Attach event handlers in the Designer (Properties > Events) or double-click controls.
+            // Example for a control: this.btnAddVerse = new System.Windows.Forms.Button();
+            // Set properties like Text, Location, Size, Multiline, etc.
+            // Add to groups with grpAddVerse.Controls.Add(...);
+            // Add to form with this.Controls.Add(...);
+        }
+
+        #endregion
+
+        private MenuStrip mnsFileActions;
+        private ToolStripMenuItem tsmFile;
+        private ToolStripMenuItem tsmSave;
+        private ToolStripMenuItem tsmLoad;
+        private ToolStripMenuItem tsmExit;
+        private GroupBox grpAddVerse;
+        private Label lblBook;
+        private ComboBox cmbVerseBook;
+        private Label lblBookError;
+        private Label lblChapter;
+        private TextBox txtVerseChapter;
+        private Label lblChapterError;
+        private Label lblVerse;
+        private TextBox txtVerseVerse;
+        private Label lblVerseError;
+        private Label lblText;
+        private TextBox txtVerseText;
+        private Label lblTextError;
+        private Label lblMeaning;
+        private TextBox txtVerseMeaning;
+        private Label lblMeaningError;
+        private Label lblImportance;
+        private NumericUpDown nudVerseImportance;
+        private Label lblImportanceError;
+        private Button btnAddVerse;
+        private GroupBox grpFilterAndSort;
+        private RadioButton rdoShowAll;
+        private RadioButton rdoShowLeastValuable;
+        private RadioButton rdoShowMostValuable;
+        private TrackBar trbNumberToShow;
+        private DataGridView dgvVerseDisplay;
+    }
+}
